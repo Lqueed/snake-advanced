@@ -186,7 +186,7 @@ function placeFood() {
   ctx.fillRect(food.x, food.y, box, box);
 
   let x,y;
-  while (!checkIfInField(x,y)) {
+  while (!checkIfInField(x,y) && !checkIfInSnake(x,y)) {
     x = Math.floor((Math.random() * 39 + 1)) * box;
     y = Math.floor((Math.random() * 29 + 1)) * box;
   }
@@ -199,6 +199,15 @@ function placeFood() {
 function drawFood() {
   ctx.fillStyle = "rgba(232, 60, 35, " + r_a + ")";
   ctx.fillRect(food.x, food.y, box, box);
+}
+
+function checkIfInSnake(x,y) {
+	for(let i = 0; i < snake.length; i++) {
+    if (x == snake[i].x && snake[i].y == y) {
+      return true;
+    }
+    else return false;
+  }
 }
 
 //snake
@@ -299,5 +308,3 @@ function drawGame() {
 }
 
 let game = setInterval(drawGame, 120);
-
-
